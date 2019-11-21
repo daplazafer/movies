@@ -23,9 +23,9 @@ public class Actor {
 	private Long id;
 	
 	@NotEmpty
-	private String fullName;
+	private String name;
 
-	@OneToMany(mappedBy = "id.actor")
+	@OneToMany(mappedBy = "id.actor", cascade = CascadeType.ALL)
 	private List<Performance> performances;
 
 }

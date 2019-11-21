@@ -14,6 +14,6 @@ public class ActorOutDTO extends BaseDTO {
 	
 	private Long id;
 
-	private String fullName;
+	private String name;
 
 }

@@ -47,7 +47,7 @@ public class Movie {
 	@Max(YEAR_MAX)
 	private int year;
 
-	@OneToMany(mappedBy = "id.movie")
+	@OneToMany(mappedBy = "id.movie", cascade = CascadeType.ALL)
 	private List<Performance> performances;
 
 }

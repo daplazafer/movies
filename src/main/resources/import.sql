@@ -1,11 +1,11 @@
 /* ACTORS */
-INSERT INTO actors(id, full_name) VALUES (1, 'Leonardo Dicaprio');
-INSERT INTO actors(id, full_name) VALUES (2, 'Brad Pitt');
-INSERT INTO actors(id, full_name) VALUES (3, 'Richard Gere');
-INSERT INTO actors(id, full_name) VALUES (4, 'Keanu Reeves');
-INSERT INTO actors(id, full_name) VALUES (5, 'Laurence Fishburne');
-INSERT INTO actors(id, full_name) VALUES (6, 'Julia Roberts');
-INSERT INTO actors(id, full_name) VALUES (7, 'Jack Nicholson');
+INSERT INTO actors(id, name) VALUES (1, 'Leonardo Dicaprio');
+INSERT INTO actors(id, name) VALUES (2, 'Brad Pitt');
+INSERT INTO actors(id, name) VALUES (3, 'Richard Gere');
+INSERT INTO actors(id, name) VALUES (4, 'Keanu Reeves');
+INSERT INTO actors(id, name) VALUES (5, 'Laurence Fishburne');
+INSERT INTO actors(id, name) VALUES (6, 'Julia Roberts');
+INSERT INTO actors(id, name) VALUES (7, 'Jack Nicholson');
 
 /* GENRES */
 INSERT INTO genres(id, name) VALUES (1, 'Thriller');
