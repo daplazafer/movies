@@ -4,6 +4,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.dpf.movies.core.base.BaseEntity;
 import com.dpf.movies.domain.pk.PerformancePK;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "performances")
-public class Performance {
+public class Performance extends BaseEntity {
 
 	@EmbeddedId
 	private PerformancePK id;

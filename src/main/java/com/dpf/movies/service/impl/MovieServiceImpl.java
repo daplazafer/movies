@@ -22,9 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -80,19 +78,16 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     public MovieDetailOutDTO partialUpdate(Long id, MovieInDTO partialMovie) {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Movie currentMovie = getMovie(id);
+        MovieInDTO currentMovie = getMapper().map(getMovie(id), MovieInDTO.class);
         Map<String, Object> currentMovieMap = objectMapper.convertValue(currentMovie, Map.class);
 
-        Map<String, Object> partialMovieMap = objectMapper.convertValue(mapToMovie(partialMovie), Map.class);
-        partialMovieMap.entrySet().stream()
-                .filter(entry -> isNull(entry.getValue()))
-                .map(Map.Entry::getKey)
-                .forEach(key -> partialMovieMap.remove(key));
+        Map<String, Object> partialMovieMap = objectMapper.convertValue(partialMovie, Map.class);
+        partialMovieMap.values().removeAll(Collections.singleton(null));
 
         currentMovieMap.putAll(partialMovieMap);
 
-        Movie newMovie = objectMapper.convertValue(currentMovieMap, Movie.class);
-        return update(id, getMapper().map(newMovie, MovieInDTO.class));
+        MovieInDTO newMovie = objectMapper.convertValue(currentMovieMap, MovieInDTO.class);
+        return update(id, newMovie);
     }
 
     @Override

@@ -28,37 +28,37 @@ public class MovieControllerImpl extends BaseController implements MovieControll
     @PostMapping
     public ResponseEntity<MovieDetailOutDTO> create(@RequestBody MovieInDTO movie) {
         MovieDetailOutDTO newMovie = movieService.save(movie);
-        return new ResponseEntity<>(newMovie, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newMovie);
     }
 
     @GetMapping
     public ResponseEntity<List<MovieOutDTO>> readAll(Pageable pageable) {
         List<MovieOutDTO> movies = movieService.getAll(pageable);
-        return new ResponseEntity<>(movies, movies.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK);
+        return ResponseEntity.status(movies.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK).body(movies);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieDetailOutDTO> read(@PathVariable Long id) {
         MovieDetailOutDTO movie = movieService.getById(id);
-        return new ResponseEntity<>(movie, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MovieDetailOutDTO> update(@PathVariable Long id, @RequestBody MovieInDTO movie) {
         MovieDetailOutDTO updatedMovie = movieService.update(id, movie);
-        return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedMovie);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<MovieDetailOutDTO> partialUpdate(@PathVariable Long id, @RequestBody MovieInDTO movie) {
         MovieDetailOutDTO updatedMovie = movieService.partialUpdate(id, movie);
-        return new ResponseEntity<>(updatedMovie, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedMovie);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id) {
         movieService.delete(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

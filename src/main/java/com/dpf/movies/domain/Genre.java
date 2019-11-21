@@ -1,16 +1,14 @@
 package com.dpf.movies.domain;
 
+import com.dpf.movies.core.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @Builder
@@ -18,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Entity
 @Table(name = "genres")
-public class Genre {
+public class Genre extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +24,8 @@ public class Genre {
 
 	@NotEmpty
 	private String name;
+
+	@OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
+	private List<Movie> movies;
 
 }

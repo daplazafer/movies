@@ -1,5 +1,6 @@
 package com.dpf.movies.domain;
 
+import com.dpf.movies.core.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Entity
 @Table(name = "actors")
-public class Actor {
+public class Actor extends BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

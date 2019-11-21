@@ -1,5 +1,6 @@
 package com.dpf.movies.domain;
 
+import com.dpf.movies.core.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Entity
 @Table(name = "movies")
-public class Movie {
+public class Movie extends BaseEntity {
 	
 	public static final int YEAR_MIN = 1800;
 	public static final int YEAR_MAX = 2200;
