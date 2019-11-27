@@ -2,6 +2,7 @@ package com.dpf.movies.controller.impl;
 
 import com.dpf.movies.controller.MovieController;
 import com.dpf.movies.core.base.BaseController;
+import com.dpf.movies.core.log.Loggable;
 import com.dpf.movies.dto.MovieDetailOutDTO;
 import com.dpf.movies.dto.MovieInDTO;
 import com.dpf.movies.dto.MovieOutDTO;

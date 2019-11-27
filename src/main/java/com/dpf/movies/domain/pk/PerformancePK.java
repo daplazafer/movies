@@ -27,4 +27,12 @@ public class PerformancePK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "actor_id")
     private Actor actor;
+
+    @Override
+    public String toString() {
+        return "PerformancePK{" +
+                "movie=" + movie.getId() +
+                ", actor=" + actor.getId() +
+                '}';
+    }
 }

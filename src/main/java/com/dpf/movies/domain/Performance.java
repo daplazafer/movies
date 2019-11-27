@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "performances")
+@Table(name = "PERFORMANCES")
 public class Performance extends BaseEntity {
 
 	@EmbeddedId

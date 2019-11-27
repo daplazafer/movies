@@ -21,11 +21,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.isNull;
 
 @Service
 @PropertySource("classpath:error.properties")
@@ -48,28 +50,31 @@ public class MovieServiceImpl extends BaseService implements MovieService {
 
     @Override
     public List<MovieOutDTO> getAll(Pageable pageable) {
-        Page<Movie> movies = movieRepository.findAll(pageable);
-        return getMapper().mapAsList(movies.getContent(), MovieOutDTO.class);
+        Page<Movie> moviesRetrieved = movieRepository.findAll(pageable);
+        return getMapper().mapAsList(moviesRetrieved.getContent(), MovieOutDTO.class);
     }
 
     @Override
     public MovieDetailOutDTO getById(Long id) {
-        Movie movie = getMovie(id);
-        return getMapper().map(movie, MovieDetailOutDTO.class);
+        Movie movieRetrieved = getMovieById(id);
+        return getMapper().map(movieRetrieved, MovieDetailOutDTO.class);
     }
 
     @Override
     public MovieDetailOutDTO save(MovieInDTO movieInDTO) {
-        Movie movie = mapToMovie(movieInDTO);
-        Movie newMovie = movieRepository.save(movie);
-        return getMapper().map(newMovie, MovieDetailOutDTO.class);
+        Movie movieToSave = generateMovie(movieInDTO);
+        Movie movieSaved = movieRepository.save(movieToSave);
+        return getMapper().map(movieSaved, MovieDetailOutDTO.class);
     }
 
+    @Transactional
     @Override
     public MovieDetailOutDTO update(Long id, MovieInDTO movieInDTO) {
-        getMovie(id);
-        Movie movieToUpdate = mapToMovie(movieInDTO);
-        movieToUpdate.setId(id);
+        getMovieById(id);
+
+        Movie movieToUpdate = generateMovie(movieInDTO);
+        movieToUpdate.setId(movieToUpdate.getId());
+
         Movie updatedMovie = movieRepository.save(movieToUpdate);
         return getMapper().map(updatedMovie, MovieDetailOutDTO.class);
     }
@@ -78,7 +83,7 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     public MovieDetailOutDTO partialUpdate(Long id, MovieInDTO partialMovie) {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        MovieInDTO currentMovie = getMapper().map(getMovie(id), MovieInDTO.class);
+        MovieInDTO currentMovie = getMapper().map(getMovieById(id), MovieInDTO.class);
         Map<String, Object> currentMovieMap = objectMapper.convertValue(currentMovie, Map.class);
 
         Map<String, Object> partialMovieMap = objectMapper.convertValue(partialMovie, Map.class);
@@ -92,15 +97,17 @@ public class MovieServiceImpl extends BaseService implements MovieService {
 
     @Override
     public void delete(Long id) {
-        getMovie(id);
+        getMovieById(id);
         movieRepository.deleteById(id);
     }
 
-    private Movie getMovie(Long id) {
-        return movieRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_NOTFOUND + id.toString()));
+    private Movie getMovieById(Long id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_NOTFOUND + id.toString()));
+        movie.getPerformances().size();
+        return movie;
     }
 
-    private Movie mapToMovie(MovieInDTO movieInDTO) {
+    private Movie generateMovie(MovieInDTO movieInDTO) {
         Movie movie = getMapper().map(movieInDTO, Movie.class);
         movie.setGenre(getMapper().map(genreService.getById(movieInDTO.getGenreId()), Genre.class));
         Optional.ofNullable(movieInDTO.getActors()).ifPresent(actors -> movie.setPerformances(actors.stream()

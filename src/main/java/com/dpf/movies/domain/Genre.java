@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "genres")
+@Table(name = "GENRES")
 public class Genre extends BaseEntity {
 
 	@Id
@@ -24,8 +24,5 @@ public class Genre extends BaseEntity {
 
 	@NotEmpty
 	private String name;
-
-	@OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
-	private List<Movie> movies;
 
 }

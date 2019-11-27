@@ -2,15 +2,21 @@ package com.dpf.movies.service.impl;
 
 import com.dpf.movies.core.base.BaseService;
 import com.dpf.movies.core.exception.NotFoundException;
+import com.dpf.movies.domain.QActor;
 import com.dpf.movies.dto.ActorOutDTO;
 import com.dpf.movies.domain.Actor;
 import com.dpf.movies.service.ActorService;
+import com.dpf.movies.service.MovieService;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import com.dpf.movies.repository.ActorRepository;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 @PropertySource("classpath:error.properties")

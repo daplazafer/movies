@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "actors")
+@Table(name = "ACTORS")
 public class Actor extends BaseEntity {
 	
 	@Id
