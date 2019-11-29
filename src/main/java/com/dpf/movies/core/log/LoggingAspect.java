@@ -5,10 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
+import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -31,9 +29,13 @@ public class LoggingAspect {
     private void loggable() {
     }
 
+    @Pointcut("execution(* ma.glasnost.orika.MapperFacade.map(..))")
+    private void mapper(){
+    }
+
     @Before("controllerAndService() || loggable()")
     private void logMethodInvocation(JoinPoint joinPoint) {
-        logger.info(String.format("INVOKE %s", getMethodInvocationInfo(joinPoint)));
+        log("ENTER %s", getMethodInvocationInfo(joinPoint));
     }
 
     @Around("controllerAndService() || loggable()")
@@ -42,10 +44,15 @@ public class LoggingAspect {
         Object methodExecution = joinPoint.proceed();
         timeElapsed = System.currentTimeMillis() - timeElapsed;
 
-        logger.info(String.format("COMPLETED %s in %s ms",
+        log("COMPLETED %s in %s ms",
                 getMethodInvocationInfo(joinPoint),
-                timeElapsed));
+                timeElapsed);
         return methodExecution;
+    }
+
+    @AfterReturning(value = "mapper()", returning = "returnValue")
+    private void logMapping(JoinPoint joinPoint, Object returnValue) {
+        log("MAP %s => %s", joinPoint.getArgs()[0], returnValue);
     }
 
     private static String getMethodInvocationInfo(JoinPoint joinPoint) {
@@ -55,6 +62,10 @@ public class LoggingAspect {
                 Optional.ofNullable(joinPoint.getArgs()).map(args -> Stream.of(args)
                         .map(Objects::toString)
                         .collect(Collectors.joining(", "))).orElse(Strings.EMPTY));
+    }
+
+    private void log(String message, Object... args){
+        logger.info(String.format(message, args));
     }
 
 }
