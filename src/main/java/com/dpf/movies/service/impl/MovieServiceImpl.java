@@ -30,7 +30,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@PropertySource("classpath:error.properties")
 public class MovieServiceImpl extends BaseService implements MovieService {
 
     private MovieRepository movieRepository;
@@ -38,7 +37,7 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     private ActorService actorService;
 
     private @Value("${error.movie.notfound}")
-    String ERROR_NOTFOUND;
+    String ERROR_MESSAGE;
 
     @Autowired
     public MovieServiceImpl(MovieRepository movieRepository, GenreService genreService, ActorService actorService) {
@@ -51,7 +50,9 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     @Override
     public List<MovieOutDTO> getAll(Pageable pageable) {
         Page<Movie> moviesRetrieved = movieRepository.findAll(pageable);
-        return getMapper().mapAsList(moviesRetrieved.getContent(), MovieOutDTO.class);
+        return moviesRetrieved.getContent().stream()
+                .map(movie -> getMapper().map(movie, MovieOutDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -102,7 +103,7 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     }
 
     private Movie getMovieById(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_NOTFOUND + id.toString()));
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_MESSAGE + id.toString()));
         movie.getPerformances().size();
         return movie;
     }

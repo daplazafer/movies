@@ -1,5 +1,6 @@
 package com.dpf.movies.core.exception.controller;
 
+import com.dpf.movies.core.base.BaseException;
 import com.dpf.movies.core.exception.NotFoundException;
 import com.dpf.movies.core.exception.dto.ExceptionDTO;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,9 @@ public class ExceptionControllerAdvice {
                         .build());
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionDTO> notFoundException(NotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<ExceptionDTO> baseException(BaseException e) {
+        return ResponseEntity.status(e.getHttpStatus())
                 .body(ExceptionDTO.builder()
                         .message(e.getMessage())
                         .timestamp(LocalDateTime.now())

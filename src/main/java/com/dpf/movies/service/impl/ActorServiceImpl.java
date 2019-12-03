@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Service
-@PropertySource("classpath:error.properties")
 public class ActorServiceImpl extends BaseService implements ActorService {
 
     private ActorRepository actorRepository;

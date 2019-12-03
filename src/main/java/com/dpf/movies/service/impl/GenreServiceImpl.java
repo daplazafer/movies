@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.dpf.movies.repository.GenreRepository;
 
 @Service
-@PropertySource("classpath:error.properties")
 public class GenreServiceImpl extends BaseService implements GenreService {
 	
 	private GenreRepository genreRepository;
