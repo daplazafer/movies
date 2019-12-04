@@ -24,7 +24,7 @@ public class MovieToMovieInDTOConverter extends CustomConverter<Movie, MovieInDT
                         .map(Performance::getId)
                         .map(PerformancePK::getActor)
                         .map(Actor::getId)
-                .collect(Collectors.toList()))
+                        .collect(Collectors.toList()))
                 .genreId(movie.getGenre().getId())
                 .build();
     }

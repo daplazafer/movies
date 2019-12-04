@@ -18,7 +18,7 @@ public interface ActorRepository extends JpaRepository<Actor, Long>, QuerydslPre
     @Query("SELECT a FROM Actor a INNER JOIN Performance p ON a = p.id.actor INNER JOIN Movie m ON p.id.movie = m AND m.id = :id")
     List<Actor> findByMovieIdQuery(@Param("id") Long movieId);
 
-    default List<Actor> findByMovieIdQueryDSL(Long movieId){
+    default List<Actor> findByMovieIdQueryDSL(Long movieId) {
         Iterable<Actor> queryResult = findAll(QActor.actor.performances.any().id.movie.id.eq(movieId));
         return StreamSupport.stream(queryResult.spliterator(), false).collect(Collectors.toList());
     }

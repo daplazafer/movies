@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieOutDTO extends BaseDTO {
-	
-	private Long id;
 
-	private String title;
+    private Long id;
 
-	private int year;
+    private String title;
+
+    private int year;
 
 }

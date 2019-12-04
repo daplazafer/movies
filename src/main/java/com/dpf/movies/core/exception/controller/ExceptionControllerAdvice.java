@@ -1,7 +1,6 @@
 package com.dpf.movies.core.exception.controller;
 
 import com.dpf.movies.core.base.BaseException;
-import com.dpf.movies.core.exception.NotFoundException;
 import com.dpf.movies.core.exception.dto.ExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

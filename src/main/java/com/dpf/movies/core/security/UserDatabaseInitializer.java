@@ -14,7 +14,7 @@ public class UserDatabaseInitializer {
     private UserRepository userRepository;
 
     @PostConstruct
-    private void initUsers(){
+    private void initUsers() {
 
         User admin = new User(1l, "admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                 "ROLE_ADMIN", "ROLE_USER");

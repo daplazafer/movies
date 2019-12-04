@@ -6,7 +6,6 @@ import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -30,7 +29,7 @@ public class LoggingAspect {
     }
 
     @Pointcut("execution(* ma.glasnost.orika.MapperFacade.map(..))")
-    private void mapper(){
+    private void mapper() {
     }
 
     @Before("controllerAndService() || loggable()")
@@ -64,7 +63,7 @@ public class LoggingAspect {
                         .collect(Collectors.joining(", "))).orElse(Strings.EMPTY));
     }
 
-    private void log(String message, Object... args){
+    private void log(String message, Object... args) {
         logger.info(String.format(message, args));
     }
 

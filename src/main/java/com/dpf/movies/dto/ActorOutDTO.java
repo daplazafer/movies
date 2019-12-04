@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ActorOutDTO extends BaseDTO {
-	
-	private Long id;
 
-	private String name;
+    private Long id;
+
+    private String name;
 
 }

@@ -10,7 +10,7 @@ public abstract class BaseService {
     @Autowired
     private MapperFacade mapper;
 
-    protected MapperFacade getMapper(){
+    protected MapperFacade getMapper() {
         return mapper;
     }
 

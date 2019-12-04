@@ -14,14 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 public class MovieDetailOutDTO extends BaseDTO {
 
-	private Long id;
+    private Long id;
 
-	private String title;
+    private String title;
 
-	private int year;
+    private int year;
 
-	private GenreOutDTO genre;
+    private GenreOutDTO genre;
 
-	private List<ActorOutDTO> actors;
+    private List<ActorOutDTO> actors;
 
 }

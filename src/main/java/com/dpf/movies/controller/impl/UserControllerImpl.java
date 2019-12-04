@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 public class UserControllerImpl extends BaseController implements UserController {
 
     @GetMapping("${resource.user.me}")
-    public ResponseEntity me(Authentication authentication){
+    public ResponseEntity me(Authentication authentication) {
         return Optional.ofNullable(authentication)
                 .map(auth -> ResponseEntity.ok(UserOutDTO.builder()
-                .name(authentication.getName())
-                .roles(authentication.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority)
-                        .collect(Collectors.toList()))
-                .build()))
+                        .name(authentication.getName())
+                        .roles(authentication.getAuthorities().stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toList()))
+                        .build()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 

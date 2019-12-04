@@ -1,11 +1,11 @@
 package com.dpf.movies.service;
 
-import java.util.List;
-
 import com.dpf.movies.dto.MovieDetailOutDTO;
-import com.dpf.movies.dto.MovieOutDTO;
 import com.dpf.movies.dto.MovieInDTO;
+import com.dpf.movies.dto.MovieOutDTO;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface MovieService {
 

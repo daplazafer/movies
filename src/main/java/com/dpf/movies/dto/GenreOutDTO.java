@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GenreOutDTO extends BaseDTO {
 
-	private Long id;
+    private Long id;
 
-	private String name;
+    private String name;
 
 }

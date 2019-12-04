@@ -6,10 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @Builder
@@ -18,15 +17,15 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "ACTORS")
 public class Actor extends BaseEntity {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotEmpty
-	private String name;
 
-	@OneToMany(mappedBy = "id.actor", cascade = CascadeType.ALL)
-	private List<Performance> performances;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotEmpty
+    private String name;
+
+    @OneToMany(mappedBy = "id.actor", cascade = CascadeType.ALL)
+    private List<Performance> performances;
 
 }

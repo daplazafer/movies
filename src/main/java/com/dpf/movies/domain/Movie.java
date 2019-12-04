@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -20,26 +19,26 @@ import java.util.List;
 @Entity
 @Table(name = "MOVIES")
 public class Movie extends BaseEntity {
-	
-	public static final int YEAR_MIN = 1800;
-	public static final int YEAR_MAX = 2200;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    public static final int YEAR_MIN = 1800;
+    public static final int YEAR_MAX = 2200;
 
-	@NotEmpty
-	private String title;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "genre_id")
-	private Genre genre;
+    @NotEmpty
+    private String title;
 
-	@Min(YEAR_MIN)
-	@Max(YEAR_MAX)
-	private int year;
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
-	@OneToMany(mappedBy = "id.movie", cascade = CascadeType.ALL)
-	private List<Performance> performances;
+    @Min(YEAR_MIN)
+    @Max(YEAR_MAX)
+    private int year;
+
+    @OneToMany(mappedBy = "id.movie", cascade = CascadeType.ALL)
+    private List<Performance> performances;
 
 }
