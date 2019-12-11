@@ -1,11 +1,11 @@
-package com.dpf.movies.domain;
+package com.dpf.movies.dto;
 
+import com.dpf.movies.core.base.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,20 +14,16 @@ import java.util.stream.Stream;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "USERS")
-public class User {
+public class UserInDTO extends BaseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(unique = true)
     private String name;
 
     private String passwordHash;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
+
+    public UserInDTO(String name, String passwordHash, String... roles) {
+        this(name, passwordHash, Stream.of(roles).collect(Collectors.toList()));
+    }
 
 }

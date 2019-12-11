@@ -1,5 +1,6 @@
 package com.dpf.movies.core.configuration;
 
+import com.dpf.movies.core.util.Hasher;
 import ma.glasnost.orika.CustomConverter;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -25,6 +26,11 @@ public class MapperConfiguration {
                 .peek(converter -> logger.info(String.format("Registered converter: %s -> %s", converter.getAType(), converter.getBType())))
                 .forEach(customConverter -> mapperFactory.getConverterFactory().registerConverter(customConverter));
         return mapperFactory.getMapperFacade();
+    }
+
+    @Bean
+    Hasher getHasher(){
+        return new Hasher();
     }
 
 }

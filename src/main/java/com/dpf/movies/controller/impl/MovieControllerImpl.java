@@ -9,7 +9,6 @@ import com.dpf.movies.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,39 +25,39 @@ public class MovieControllerImpl extends BaseController implements MovieControll
     }
 
     @PostMapping
-    public ResponseEntity<MovieDetailOutDTO> create(@RequestBody MovieInDTO movie) {
-        MovieDetailOutDTO newMovie = movieService.save(movie);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newMovie);
+    @ResponseStatus(HttpStatus.CREATED)
+    public MovieDetailOutDTO create(@RequestBody MovieInDTO movie) {
+        return movieService.save(movie);
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieOutDTO>> readAll(Pageable pageable) {
-        List<MovieOutDTO> movies = movieService.getAll(pageable);
-        return ResponseEntity.status(movies.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK).body(movies);
+    @ResponseStatus(HttpStatus.OK)
+    public List<MovieOutDTO> readAll(Pageable pageable) {
+        return movieService.getAll(pageable);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieDetailOutDTO> read(@PathVariable Long id) {
-        MovieDetailOutDTO movie = movieService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(movie);
+    @ResponseStatus(HttpStatus.OK)
+    public MovieDetailOutDTO read(@PathVariable Long id) {
+        return movieService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDetailOutDTO> update(@PathVariable Long id, @RequestBody MovieInDTO movie) {
-        MovieDetailOutDTO updatedMovie = movieService.update(id, movie);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedMovie);
+    @ResponseStatus(HttpStatus.OK)
+    public MovieDetailOutDTO update(@PathVariable Long id, @RequestBody MovieInDTO movie) {
+        return movieService.update(id, movie);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<MovieDetailOutDTO> partialUpdate(@PathVariable Long id, @RequestBody MovieInDTO movie) {
-        MovieDetailOutDTO updatedMovie = movieService.partialUpdate(id, movie);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedMovie);
+    @ResponseStatus(HttpStatus.OK)
+    public MovieDetailOutDTO partialUpdate(@PathVariable Long id, @RequestBody MovieInDTO movie) {
+        return movieService.partialUpdate(id, movie);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
         movieService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

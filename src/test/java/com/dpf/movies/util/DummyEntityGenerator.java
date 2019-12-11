@@ -1,9 +1,6 @@
 package com.dpf.movies.util;
 
-import com.dpf.movies.domain.Actor;
-import com.dpf.movies.domain.Genre;
-import com.dpf.movies.domain.Movie;
-import com.dpf.movies.domain.Performance;
+import com.dpf.movies.domain.*;
 import com.dpf.movies.domain.pk.PerformancePK;
 
 public class DummyEntityGenerator {

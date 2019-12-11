@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDateTime;
 
@@ -13,12 +14,12 @@ import java.time.LocalDateTime;
 public class ExceptionControllerAdvice {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionDTO> defaultException(Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(ExceptionDTO.builder()
-                        .message(e.getMessage())
-                        .timestamp(LocalDateTime.now())
-                        .build());
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ExceptionDTO defaultException(Exception e) {
+        return ExceptionDTO.builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
     }
 
     @ExceptionHandler(BaseException.class)

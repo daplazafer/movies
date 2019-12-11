@@ -10,16 +10,16 @@ import java.util.List;
 
 public interface MovieController {
 
-    ResponseEntity<MovieDetailOutDTO> create(MovieInDTO movie);
+    MovieDetailOutDTO create(MovieInDTO movie);
 
-    ResponseEntity<List<MovieOutDTO>> readAll(Pageable pageable);
+    List<MovieOutDTO> readAll(Pageable pageable);
 
-    ResponseEntity<MovieDetailOutDTO> read(Long id);
+    MovieDetailOutDTO read(Long id);
 
-    ResponseEntity<MovieDetailOutDTO> update(Long id, MovieInDTO movie);
+    MovieDetailOutDTO update(Long id, MovieInDTO movie);
 
-    ResponseEntity<MovieDetailOutDTO> partialUpdate(Long id, MovieInDTO movie);
+    MovieDetailOutDTO partialUpdate(Long id, MovieInDTO movie);
 
-    ResponseEntity delete(Long id);
+    void delete(Long id);
 
 }

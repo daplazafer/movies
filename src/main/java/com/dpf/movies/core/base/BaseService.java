@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:error.properties")
 public abstract class BaseService {
 
-    @Autowired
+    @Autowired(required = true)
     private MapperFacade mapper;
 
     protected MapperFacade getMapper() {
