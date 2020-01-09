@@ -1,5 +1,6 @@
 package com.dpf.movies.core.log;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
@@ -14,14 +15,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Aspect
+@Slf4j
 @Component
 public class LoggingAspect {
 
-    private Logger logger = LogManager.getLogger(this.getClass().getName());
-
     @Pointcut("within(@org.springframework.stereotype.Service *)" +
-            " || within(@org.springframework.web.bind.annotation.RestController *)")
-    private void controllerAndService() {
+            " || within(@org.springframework.web.bind.annotation.RestController *)" +
+            " || execution(public !void org.springframework.data.repository.Repository+.*(..))")
+    private void controllerServiceRepository() {
     }
 
     @Pointcut("within(@com.dpf.movies.core.log.Loggable *) || @annotation(com.dpf.movies.core.log.Loggable)")
@@ -32,12 +33,12 @@ public class LoggingAspect {
     private void mapper() {
     }
 
-    @Before("controllerAndService() || loggable()")
+    @Before("controllerServiceRepository() || loggable()")
     private void logMethodInvocation(JoinPoint joinPoint) {
         log("ENTER %s", getMethodInvocationInfo(joinPoint));
     }
 
-    @Around("controllerAndService() || loggable()")
+    @Around("controllerServiceRepository() || loggable()")
     private Object logTimeElapsedInMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
         long timeElapsed = System.currentTimeMillis();
         Object methodExecution = joinPoint.proceed();
@@ -64,7 +65,7 @@ public class LoggingAspect {
     }
 
     private void log(String message, Object... args) {
-        logger.info(String.format(message, args));
+        log.info(String.format(message, args));
     }
 
 }
