@@ -4,7 +4,6 @@ import com.dpf.movies.dto.MovieDetailOutDTO;
 import com.dpf.movies.dto.MovieInDTO;
 import com.dpf.movies.dto.MovieOutDTO;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
