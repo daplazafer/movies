@@ -35,9 +35,6 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     private GenreService genreService;
     private ActorService actorService;
 
-    private @Value("${error.movie.notfound}")
-    String ERROR_MESSAGE;
-
     @Autowired
     public MovieServiceImpl(MovieRepository movieRepository, GenreService genreService, ActorService actorService) {
         super();
@@ -102,7 +99,8 @@ public class MovieServiceImpl extends BaseService implements MovieService {
     }
 
     private Movie getMovieById(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_MESSAGE + id.toString()));
+        Movie movie = movieRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Movie not found with id=" + id.toString()));
         movie.getPerformances().size();
         return movie;
     }

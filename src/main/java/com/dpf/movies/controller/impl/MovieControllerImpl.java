@@ -11,18 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 @RequestMapping("${v1API}/${resource.movies}")
 public class MovieControllerImpl extends BaseController implements MovieController {
 
+    @Inject
     private MovieService movieService;
-
-    @Autowired
-    public MovieControllerImpl(MovieService movieService) {
-        this.movieService = movieService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

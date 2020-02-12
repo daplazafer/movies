@@ -15,9 +15,6 @@ public class GenreServiceImpl extends BaseService implements GenreService {
 
     private GenreRepository genreRepository;
 
-    private @Value("${error.genre.notfound}")
-    String ERROR_MESSAGE;
-
     @Autowired
     public GenreServiceImpl(GenreRepository genreRepository) {
         super();
@@ -26,7 +23,8 @@ public class GenreServiceImpl extends BaseService implements GenreService {
 
     @Override
     public GenreOutDTO getById(Long id) {
-        Genre genre = genreRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_MESSAGE + id.toString()));
+        Genre genre = genreRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Genre not found with id=" + id.toString()));
         return getMapper().map(genre, GenreOutDTO.class);
     }
 

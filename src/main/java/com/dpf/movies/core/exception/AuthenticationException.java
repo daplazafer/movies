@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 
 public class AuthenticationException extends BaseException {
 
-    public AuthenticationException(String message) {
-        super(HttpStatus.INTERNAL_SERVER_ERROR, message);
+    public AuthenticationException() {
+        super(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid username or password");
     }
 
 }

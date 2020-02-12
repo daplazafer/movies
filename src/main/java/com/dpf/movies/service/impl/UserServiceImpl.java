@@ -22,9 +22,6 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     private Hasher hasher;
 
-    private @Value("${error.user.login}")
-    String ERROR_MESSAGE;
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository, Hasher hasher) {
         this.userRepository = userRepository;
@@ -57,7 +54,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     private AuthenticationException newAuthenticationException() {
-        return new AuthenticationException(ERROR_MESSAGE);
+        return new AuthenticationException();
     }
 
 }

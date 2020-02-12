@@ -15,9 +15,6 @@ public class ActorServiceImpl extends BaseService implements ActorService {
 
     private ActorRepository actorRepository;
 
-    private @Value("${error.actor.notfound}")
-    String ERROR_MESSAGE;
-
     @Autowired
     public ActorServiceImpl(ActorRepository actorRepository) {
         super();
@@ -26,7 +23,8 @@ public class ActorServiceImpl extends BaseService implements ActorService {
 
     @Override
     public ActorOutDTO getById(Long id) {
-        Actor actor = actorRepository.findById(id).orElseThrow(() -> new NotFoundException(ERROR_MESSAGE + id.toString()));
+        Actor actor = actorRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Actor not found with id=" + id.toString()));
         return getMapper().map(actor, ActorOutDTO.class);
     }
 
