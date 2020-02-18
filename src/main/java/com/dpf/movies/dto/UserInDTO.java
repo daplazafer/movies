@@ -1,14 +1,13 @@
 package com.dpf.movies.dto;
 
-import com.dpf.movies.core.base.BaseDTO;
+import com.dpf.movies.common.base.BaseDTO;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Data
 @Builder

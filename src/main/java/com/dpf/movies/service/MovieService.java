@@ -3,9 +3,8 @@ package com.dpf.movies.service;
 import com.dpf.movies.dto.MovieDetailOutDTO;
 import com.dpf.movies.dto.MovieInDTO;
 import com.dpf.movies.dto.MovieOutDTO;
-import org.springframework.data.domain.Pageable;
-
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 public interface MovieService {
 

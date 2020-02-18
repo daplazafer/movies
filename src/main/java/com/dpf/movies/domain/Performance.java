@@ -1,15 +1,14 @@
 package com.dpf.movies.domain;
 
-import com.dpf.movies.core.base.BaseEntity;
+import com.dpf.movies.common.base.BaseEntity;
 import com.dpf.movies.domain.pk.PerformancePK;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Data
 @Builder

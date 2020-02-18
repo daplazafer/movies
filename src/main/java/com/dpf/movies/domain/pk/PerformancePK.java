@@ -2,15 +2,14 @@ package com.dpf.movies.domain.pk;
 
 import com.dpf.movies.domain.Actor;
 import com.dpf.movies.domain.Movie;
+import java.io.Serializable;
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.io.Serializable;
 
 @Data
 @Builder
@@ -30,8 +29,8 @@ public class PerformancePK implements Serializable {
     @Override
     public String toString() {
         return "PerformancePK{" +
-                "movie=" + movie.getId() +
-                ", actor=" + actor.getId() +
-                '}';
+            "movie=" + movie.getId() +
+            ", actor=" + actor.getId() +
+            '}';
     }
 }

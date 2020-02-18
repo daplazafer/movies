@@ -1,6 +1,6 @@
 package com.dpf.movies.dto;
 
-import com.dpf.movies.core.base.BaseDTO;
+import com.dpf.movies.common.base.BaseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
